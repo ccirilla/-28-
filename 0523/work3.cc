@@ -44,7 +44,7 @@ public:
             cout << "It has a bomb and it's morale is " ;
         else
             cout << "It has a arrow and it's morale is ";
-        printf("%.2lf\n",(_morale+0.005));
+        printf("%.2lf\n",(_morale));
     }
 private:
     int _weapon;
@@ -379,48 +379,51 @@ int     Wolf::num(0);
 
 int main()
 {
+    cout << setfill('0');
     int ccase;
     int k;
     cin >> ccase;
-    cin >> k;
-    Red r(k);
-    Blue b(k);
-    cin >> k;
-    Dragon::setPrice(k);
-    cin >> k;
-    Ninja::setPrice(k);
-    cin >> k;
-    Iceman::setPrice(k);
-    cin >> k;
-    Lion::setPrice(k);
-    cin >> k;
-    Wolf::setPrice(k);
-    int i=0;
-    bool flagr = true;
-    bool flagb = true;
-    cout << "Case:" << ccase << endl;
-    while(1)
+    for(int ii=1;ii<=ccase;ii++)
     {
-        if(flagr)
-        { 
-            flagr = r.createWarrior(i);
-            if(flagr == false)
-            {
-                cout << setw(3) << i << " red headquarter stops making warriors" <<endl;
+        cin >> k;
+        Red r(k);
+        Blue b(k);
+        cin >> k;
+        Dragon::setPrice(k);
+        cin >> k;
+        Ninja::setPrice(k);
+        cin >> k;
+        Iceman::setPrice(k);
+        cin >> k;
+        Lion::setPrice(k);
+        cin >> k;
+        Wolf::setPrice(k);
+        int i=0;
+        bool flagr = true;
+        bool flagb = true;
+        cout << "Case:" << ii << endl;
+        while(1)
+        {
+            if(flagr)
+            { 
+                flagr = r.createWarrior(i);
+                if(flagr == false)
+                {
+                    cout << setw(3) << i << " red headquarter stops making warriors" <<endl;
+                }
             }
-        }
-        if(flagb)
-        { 
-            flagb = b.createWarrior(i);
-            if(flagb == false)
-            {
-                cout << setw(3) << i << " blue headquarter stops making warriors" <<endl;
+            if(flagb)
+            { 
+                flagb = b.createWarrior(i);
+                if(flagb == false)
+                {
+                    cout << setw(3) << i << " blue headquarter stops making warriors" <<endl;
+                }
             }
-        }
-        if(flagr == false && flagb == false)
-            break;
-        ++i;
-    }
+            if(flagr == false && flagb == false)
+                break;
+            ++i;
+        }}
     return 0;
 }
 
