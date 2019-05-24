@@ -39,11 +39,11 @@ public:
             << " born with strength " << getHp() << "," << sum <<" dragon in "
             << color << " headquarter" << endl;
         if(_weapon == 0)
-            cout << "It has a sword and it's morale is ";
+            cout << "It has a sword,and it's morale is ";
         else if(_weapon == 1)
-            cout << "It has a bomb and it's morale is " ;
+            cout << "It has a bomb,and it's morale is " ;
         else
-            cout << "It has a arrow and it's morale is ";
+            cout << "It has a arrow,and it's morale is ";
         printf("%.2lf\n",(_morale));
     }
 private:
