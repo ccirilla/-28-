@@ -13,18 +13,29 @@ Mylogger * Mylogger::getMylogger()
     }
     return _log;
 }
-void Mylogger::warn(const char * msg){
-    _myRecord.warn(msg);
+
+void Mylogger::error(const char * msg)
+{
+        _myRecord.error(msg);
+        
 }
-void Mylogger::error(const char * msg){
-    _myRecord.error(msg);
+void Mylogger::info(const char * msg)
+{
+        _myRecord.info(msg);
+        
 }
-void Mylogger::debug(const char * msg){
-    _myRecord.debug(msg);
+void Mylogger::warn(const char * msg)
+{
+        _myRecord.warn(msg);
+        
 }
-void Mylogger::info(const char * msg){
-    _myRecord.info(msg);
+
+void Mylogger::debug(const char * msg)
+{
+        _myRecord.debug(msg);
+        
 }
+
 void Mylogger::setPriority(const string &str)
 {
     if(str == "DEBUG")
