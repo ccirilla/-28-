@@ -120,8 +120,6 @@ class GameTime
 public:
     static GameTime * getInstance();
 
-    static void init();
-
     static void destroy();
 
     void showTime() const;
@@ -134,7 +132,6 @@ private:
 
 private:
     static GameTime * _pInstance;
-    static pthread_once_t _once;
     int _time;
     int _max;
 };
@@ -710,24 +707,15 @@ config* GameConfig::getConfig(int i)
 }
 
 GameTime * GameTime::_pInstance = nullptr;
-pthread_once_t GameTime::_once;
 
 GameTime * GameTime::getInstance()
-{
-    pthread_once(&_once,init);
-    return _pInstance;
-
-}
-
-void GameTime::init()
 {
     if(!_pInstance)
     {
         _pInstance = new GameTime();
         atexit(destroy);
-
     }
-
+    return _pInstance;
 }
 
 void GameTime::destroy()
