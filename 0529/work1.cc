@@ -14,7 +14,7 @@ public:
     void read(const std::string & filename);
     void store(const std::string & filename);
 private:
-    //map<string,int> _word_count;
+//    map<string,int> _word_count;
     unordered_map<string,int> _word_count;
 };
 

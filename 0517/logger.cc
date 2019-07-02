@@ -13,7 +13,7 @@ Mylogger * Mylogger::getMylogger()
     }
     return _log;
 }
-
+#if 0
 void Mylogger::error(const char * msg)
 {
         _myRecord.error(msg);
@@ -35,6 +35,8 @@ void Mylogger::debug(const char * msg)
         _myRecord.debug(msg);
         
 }
+#endif
+
 
 void Mylogger::setPriority(const string &str)
 {

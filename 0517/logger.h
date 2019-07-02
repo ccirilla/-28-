@@ -22,10 +22,12 @@ class Mylogger
 {
 public:
     static Mylogger * getMylogger();
+#if 0
     void error(const char * msg);
     void warn(const char * msg);
     void info(const char * msg);
     void debug(const char * msg);
+#endif
 
     template <typename... Args>
         void warn(Args... args){

@@ -1,0 +1,97 @@
+#include "TaskQue.h"
+#include <unistd.h>
+#include <functional>
+#include <memory>
+using namespace std;
+
+class Thread
+:Noncopyable
+{
+public:
+    using ThreadCallback = function<void()> ;
+    Thread(ThreadCallback && func)
+        : _cb(move(func))
+    {}
+    ~Thread(){
+        if(_isRuning){
+            pthread_detach(_pthid);
+            _isRuning = false;
+        }
+    }
+    void start(){
+        pthread_create(&_pthid,nullptr,ThreadFunc,this);
+        _isRuning = true;
+    }
+    void join(){
+        if(_isRuning){
+            pthread_join(_pthid,nullptr);
+            _isRuning = false;
+        }
+    }
+
+private:
+    static void* ThreadFunc(void* p){
+        Thread * pthread = (Thread*)p;
+        pthread->_cb();
+        return nullptr;
+    }
+private:
+    pthread_t _pthid;
+    bool _isRuning = false;
+    ThreadCallback _cb;
+};
+
+class Producer
+{
+public:
+    void create(TaskQue & taskque){
+        ::srand(::clock());
+        int cnt = 10;
+        while(cnt--){
+            int number = ::rand() % 100;
+            taskque.push(number);
+            cout << ">>producer sub thread " << pthread_self() 
+                << " producer create a number = " << number << endl;
+            sleep(1);
+        }
+    }
+};
+
+class Consumer
+{
+public:
+    void get(TaskQue & taskque){
+        ::srand(::clock());
+        int cnt = 10;
+        while(cnt--){
+            int number = taskque.pop();
+            cout << ">>consumer sub thread " << pthread_self() 
+                << " consume get a number = " << number << endl;
+            sleep(2);
+        }
+    }
+};
+
+
+
+int main()
+{
+    TaskQue taskque(10);
+    unique_ptr<Thread> producer1 (new Thread(bind(&Producer::create,Producer(),ref(taskque))));
+    unique_ptr<Thread> producer2 (new Thread(bind(&Producer::create,Producer(),ref(taskque))));
+    unique_ptr<Thread> consumer1 (new Thread(bind(&Consumer::get,Consumer(),ref(taskque))));
+    unique_ptr<Thread> consumer2 (new Thread(bind(&Consumer::get,Consumer(),ref(taskque))));
+    producer1->start();
+    producer2->start();
+    consumer1->start();
+    consumer2->start();
+
+    producer1->join();
+    producer2->join();
+    consumer1->join();
+    consumer2->join();
+
+    return 0;
+    return 0;
+}
+

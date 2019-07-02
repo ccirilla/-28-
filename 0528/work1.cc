@@ -94,6 +94,7 @@ int test()
 
 int main()
 {
+#if 0
     Queue<int,5> qstr;
     qstr.front();
     qstr.pop();
@@ -106,5 +107,7 @@ int main()
     qstr.print();
     for(int i=0;i<5;i++)
         qstr.pop();
+#endif
+    test();
     return 0;
 }

@@ -123,13 +123,13 @@ T* Singleton<T>::getInstance(Args... args)
 
 int main()
 {
-    Computer * p1 = Singleton<Computer>::getInstance();
-    //Computer * p1 = Singleton<Computer>::getInstance("Xiaomi", 6666);
+    //Computer * p1 = Singleton<Computer>::getInstance();
+    Computer * p1 = Singleton<Computer>::getInstance("Xiaomi", 6666);
     Computer * p2 = Singleton<Computer>::getInstance("Xiaomi", 6666);
     p1->print();
     p2->print();
-    Point* p3 = Singleton<Point>::getInstance();
-    //Point* p3 = Singleton<Point>::getInstance(1, 2);
+    //Point* p3 = Singleton<Point>::getInstance();
+    Point* p3 = Singleton<Point>::getInstance(1, 2);
     Point* p4 = Singleton<Point>::getInstance(1, 2);
     p3->print();
     p4->print();

@@ -1,0 +1,5 @@
+libPath ../test/lib/
+pagePath ../test/data/newripepage.lib
+offsetPath ../test/data/newoffset.lib
+indexPath ../test/data/invertIndex.lib
+stopWordPath ../include/cppjieba/dict/stop_words.utf8
